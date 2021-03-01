@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Йобакод - энкодер и декодер</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <article>
+        <h1 class="text-center">Йобакод - энкодер и декодер</h1>
+        <form id="inputs-container">
+          <label for="text-decoded">
+            <span>Текст</span>
+            <textarea
+              name="text-decoded"
+              id="text-decoded"
+              autocomplete="off"
+              data-counter-id="text-decoded-counter"
+              data-max-recommended-length="2000"
+            ></textarea>
+            <span id="text-decoded-counter">0/2000</span>
+          </label>
+          <label for="text-encoded">
+            <span>Йобакод</span>
+            <textarea
+              name="text-encoded"
+              id="text-encoded"
+              autocomplete="off"
+              spellcheck="false"
+              data-counter-id="text-encoded-counter"
+              data-max-recommended-length="2000"
+            ></textarea>
+            <span id="text-encoded-counter">0/2000</span>
+          </label>
+        </form>
+      </article>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+article {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+#inputs-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#inputs-container > * {
+  flex-grow: 1;
+  margin: 0.5em;
+}
+
+#text-decoded,
+#text-encoded {
+  display: block;
+  width: 100%;
+  resize: none;
+  height: 240px;
+}
+
+@media (min-width: 300px) {
+  #text-decoded,
+  #text-encoded {
+    min-width: 300px;
+  }
+}
+
+#text-encoded {
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+.input-counter-limit-exceeded {
+  color: red;
+}
