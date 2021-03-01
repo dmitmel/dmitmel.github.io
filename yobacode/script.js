@@ -2,20 +2,27 @@
   let yobalib = {
     TROLOLO_EMOTE_NAME: 'trololo',
     TROLOLO_EMOTE_ID: '811985940704526337',
-    utf8Encoder: new TextEncoder(),
-    utf8Decoder: new TextDecoder(),
+    CHARACTER_TABLE: [
+      '\0 ',
+      'абвгґдеєёжзиіїйклмнопрстуфхцчшщъыьэюя',
+      'abcdefghijklmnopqrstuvwxyz',
+      '0123456789',
+      '\n\r\t!@#$%^&*-_~=+\'"`.,:;?|/\\()[]{}<>',
+      '                 \ufffd',
+    ].join(''),
+    ENCODING_BITS: 7,
 
     /**
      * @param {string} text
      * @returns {string}
      */
     encode(text) {
-      let bytes = this.utf8Encoder.encode(text);
       let encoded = [];
       let trololoLongStr = `<:${this.TROLOLO_EMOTE_NAME}:${this.TROLOLO_EMOTE_ID}>`;
-      for (let i = 0, len = bytes.length; i < len; i++) {
-        let byte = bytes[i];
-        for (let j = 7; j >= 0; j--) {
+      for (let i = 0, len = text.length; i < len; i++) {
+        let char = text.charAt(i);
+        let byte = this.CHARACTER_TABLE.indexOf(char);
+        for (let j = this.ENCODING_BITS - 1; j >= 0; j--) {
           encoded.push(((byte >> j) & 1) !== 0 ? trololoLongStr : '.');
         }
       }
@@ -31,7 +38,7 @@
       let trololoLongStr = `<:${this.TROLOLO_EMOTE_NAME}:${this.TROLOLO_EMOTE_ID}>`;
       let trololoShortStr = `:${this.TROLOLO_EMOTE_NAME}:`;
 
-      let bytes = [];
+      let decoded = [];
       let byte = 0;
       let j = 0;
 
@@ -51,16 +58,18 @@
         }
 
         j++;
-        if (j >= 8) {
+        if (j >= this.ENCODING_BITS) {
           j = 0;
-          bytes.push(byte);
+          decoded.push(this.CHARACTER_TABLE[byte]);
           byte = 0;
         }
       }
 
-      return this.utf8Decoder.decode(new Uint8Array(bytes));
+      return decoded.join('');
     },
   };
+
+  console.assert(yobalib.CHARACTER_TABLE.length === 1 << yobalib.ENCODING_BITS);
 
   window.yobalib = yobalib;
 
