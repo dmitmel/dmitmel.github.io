@@ -1,6 +1,7 @@
 (() => {
   let yobalib = {
-    TROLOLO_EMOTE_STR: '<:trololo:811985940704526337>',
+    TROLOLO_EMOTE_NAME: 'trololo',
+    TROLOLO_EMOTE_ID: '811985940704526337',
     utf8Encoder: new TextEncoder(),
     utf8Decoder: new TextDecoder(),
 
@@ -11,10 +12,11 @@
     encode(text) {
       let bytes = this.utf8Encoder.encode(text);
       let encoded = [];
+      let trololoLongStr = `<:${this.TROLOLO_EMOTE_NAME}:${this.TROLOLO_EMOTE_ID}>`;
       for (let i = 0, len = bytes.length; i < len; i++) {
         let byte = bytes[i];
         for (let j = 7; j >= 0; j--) {
-          encoded.push(((byte >> j) & 1) !== 0 ? this.TROLOLO_EMOTE_STR : '.');
+          encoded.push(((byte >> j) & 1) !== 0 ? trololoLongStr : '.');
         }
       }
       return encoded.join('');
@@ -26,19 +28,28 @@
      */
     decode(text) {
       const DOT_CHAR_CODE = '.'.charCodeAt(0);
+      let trololoLongStr = `<:${this.TROLOLO_EMOTE_NAME}:${this.TROLOLO_EMOTE_ID}>`;
+      let trololoShortStr = `:${this.TROLOLO_EMOTE_NAME}:`;
+
       let bytes = [];
       let byte = 0;
       let j = 0;
+
       for (let i = 0, len = text.length; i < len; i++) {
         if (text.charCodeAt(i) === DOT_CHAR_CODE) {
           byte <<= 1;
-        } else if (text.startsWith(this.TROLOLO_EMOTE_STR, i)) {
+        } else if (text.startsWith(trololoLongStr, i)) {
           byte <<= 1;
           byte |= 1;
-          i += this.TROLOLO_EMOTE_STR.length - 1;
+          i += trololoLongStr.length - 1;
+        } else if (text.startsWith(trololoShortStr, i)) {
+          byte <<= 1;
+          byte |= 1;
+          i += trololoShortStr.length - 1;
         } else {
           continue;
         }
+
         j++;
         if (j >= 8) {
           j = 0;
@@ -46,6 +57,7 @@
           byte = 0;
         }
       }
+
       return this.utf8Decoder.decode(new Uint8Array(bytes));
     },
   };
