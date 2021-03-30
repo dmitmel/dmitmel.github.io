@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru" prefix="og: https://ogp.me/ns#">
+  <head>
+    <meta charset="UTF-8" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dmitmel.github.io/crosscode/mod-manifest-converter/" />
+    <meta property="og:title" content="package.json &#8594; ccmod.json" />
+    <meta property="og:site_name" content="dmitmel.github.io" />
+    <meta property="og:description" content="CrossCode mod manifest converter" />
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/24706696" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>package.json &#8594; ccmod.json</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <article>
+        <h1 class="text-center">package.json &#8594; ccmod.json</h1>
+        <form id="inputs-container">
+          <label for="text-package-json">
+            <span>package.json</span>
+            <textarea name="text-package-json" id="text-package-json" autocomplete="off"></textarea>
+          </label>
+          <label for="text-ccmod-json">
+            <span>ccmod.json</span>
+            <textarea
+              name="text-ccmod-json"
+              id="text-ccmod-json"
+              autocomplete="off"
+              spellcheck="false"
+              readonly
+            ></textarea>
+          </label>
+        </form>
+        <p id="error-container"></p>
+      </article>
+    </main>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
