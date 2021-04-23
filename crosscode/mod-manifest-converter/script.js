@@ -27,19 +27,19 @@ packageJsonInput.addEventListener('input', () => {
         ul.append(li);
         errorContainer.append(span, ul);
         return;
+      } else {
+        throw error;
       }
-      throw error;
     }
 
-    let manifest;
+    let modernManifest;
     try {
       validator.validateLegacy(legacyManifest);
-      manifest = manifestM.convertFromLegacy(legacyManifest);
     } catch (error) {
       if (error instanceof manifestM.ManifestValidationError) {
         let span = document.createElement('span');
         span.classList.add('error');
-        span.append('Validation errors:');
+        span.append('Validation errors for package.json:');
         let ul = document.createElement('ul');
         for (let problem of error.problems) {
           let li = document.createElement('li');
@@ -48,11 +48,33 @@ packageJsonInput.addEventListener('input', () => {
         }
         errorContainer.append(span, ul);
         return;
+      } else {
+        throw error;
       }
-      throw error;
     }
 
-    ccmodJsonInput.value = JSON.stringify(manifest, null, 2);
+    modernManifest = manifestM.convertFromLegacy(legacyManifest);
+
+    try {
+      validator.validate(modernManifest);
+    } catch (error) {
+      if (error instanceof manifestM.ManifestValidationError) {
+        let span = document.createElement('span');
+        span.classList.add('error');
+        span.append('Validation errors for ccmod.json:');
+        let ul = document.createElement('ul');
+        for (let problem of error.problems) {
+          let li = document.createElement('li');
+          li.append(String(problem));
+          ul.append(li);
+        }
+        errorContainer.append(span, ul);
+      } else {
+        throw error;
+      }
+    }
+
+    ccmodJsonInput.value = JSON.stringify(modernManifest, null, 2);
 
     let span = document.createElement('span');
     span.classList.add('success');
