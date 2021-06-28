@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru" prefix="og: https://ogp.me/ns#">
+  <head>
+    <meta charset="UTF-8" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dmitmel.github.io/crosscode/quick-packed-mod/" />
+    <meta property="og:title" content="Quick&trade; Packed&reg; mod" />
+    <meta property="og:site_name" content="dmitmel.github.io" />
+    <meta property="og:description" content="Quickly make a packed mod from a code snippet" />
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/24706696" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quick&trade; Packed&reg; mod</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <article>
+        <h1 class="text-center">Quick&trade; Packed&reg; mod</h1>
+        <p class="text-center">Quickly make a packed mod from a code snippet</p>
+        <form id="inputs-container">
+          <label for="text-mod-id">
+            <p>ID</p>
+            <input
+              type="text"
+              name="text-mod-id"
+              id="text-mod-id"
+              autocomplete="off"
+              placeholder="test-mod"
+            />
+          </label>
+          <label for="text-mod-ver">
+            <p>version</p>
+            <input
+              type="text"
+              name="text-mod-ver"
+              id="text-mod-ver"
+              autocomplete="off"
+              placeholder="0.0.0"
+            />
+          </label>
+          <label for="text-mod-human-name">
+            <p>title</p>
+            <input
+              type="text"
+              name="text-mod-human-name"
+              id="text-mod-human-name"
+              autocomplete="off"
+            />
+          </label>
+          <label for="text-mod-description">
+            <p>description</p>
+            <input
+              type="text"
+              name="text-mod-description"
+              id="text-mod-description"
+              autocomplete="off"
+            />
+          </label>
+          <label for="text-mod-prestart">
+            <p>prestart.js</p>
+            <textarea
+              name="text-mod-prestart"
+              id="text-mod-prestart"
+              autocomplete="off"
+              autofocus
+            ></textarea>
+          </label>
+          <input type="submit" id="btn-download" value="Download!" />
+        </form>
+      </article>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.6.0/dist/jszip.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
